@@ -1,4 +1,4 @@
-# Real-time Feature Aggregation Pipeline
+# Sample Project of Real-time Feature Aggregation Pipeline
 
 ## 1. Overview
 This project implements a real-time streaming data aggregation pipeline that provides online/offline features through Amazon SageMaker Feature Store.

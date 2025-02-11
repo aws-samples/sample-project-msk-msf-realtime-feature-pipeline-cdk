@@ -1,0 +1,5 @@
+setuptools
+cfnresponse
+urllib3<2.0.0,>=1.26.0
+kafka-python
+aws-msk-iam-sasl-signer-python 

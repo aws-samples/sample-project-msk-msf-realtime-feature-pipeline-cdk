@@ -1,0 +1,6 @@
+setuptools
+cfnresponse
+platformdirs>=3.0.0,<4.0.0
+urllib3>=1.26.0,<2.0.0
+sagemaker
+pandas 

@@ -1,0 +1,9 @@
+{
+    "msg_id": "A12345678",
+    "msg_type": "COUPON_VALIDATE",    
+    "device_id": "user0001",
+    "location_code": "loc4588",
+    "coupon_code": "9945-4485-5524-4452",
+    "response": "VALID",
+    "create_time": "2024-09-01T23:16:01.000"
+}

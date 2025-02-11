@@ -1,0 +1,27 @@
+[
+  {
+    "PropertyGroupId": "Input0",
+    "PropertyMap": {
+      "bootstrap.servers": "localhost:9098",
+      "topic": "log",
+      "group.id": "msfconsumer"
+    }
+  },
+  {
+    "PropertyGroupId": "Output0",
+    "PropertyMap": {
+      "bootstrap.servers": "localhost:9098",
+      "topic": "feature",
+      "transaction.timeout.ms": "1000"
+    }
+  },
+  {
+    "PropertyGroupId": "AuthProperties",
+    "PropertyMap": {
+      "sasl.mechanism": "AWS_MSK_IAM",
+      "sasl.client.callback.handler.class": "software.amazon.msk.auth.iam.IAMClientCallbackHandler",
+      "sasl.jaas.config": "software.amazon.msk.auth.iam.IAMLoginModule required;",
+      "security.protocol": "SASL_SSL"
+    }
+  }
+]

@@ -1,0 +1,38 @@
+---
+# string prefix for resources created by CDK
+namespace: proto
+
+# deploy environment
+env:
+  account: 'XXXXXXXXXXXX'
+  region: us-east-1
+
+# MSK Setup
+mskConfig:
+  clusterName: 'log-event'
+  sourceTopic:
+    topicName: 'log-input'
+    numPartitions: 1
+    replicationFactor: 2
+  sinkTopic:
+    topicName: 'log-feature'
+    numPartitions: 1
+    replicationFactor: 2
+
+# Batch Processing
+featureUpdateBatch:
+  enabled: false
+  hour: 15
+  minute: 30
+
+# SSM ParameterStore keys
+parameterStoreKeys:  
+  ddbLogTable: /RealtimeFeature/DDB/Log/Table/Arn
+  ddbLogTableEventSrc: /RealtimeFeature/DDB/Log/Table/EventSource/Arn
+  mskEventClusterArn: /RealtimeFeature/MSK/Log/Cluster/Arn
+  mskEventClusterIamBroker: /RealtimeFeature/MSK/Log/Cluster/Broker
+  featureGroupCouponPrefix: /RealtimeFeature/FeatureGroup/CouponPrefix/Name  
+  featureGroupLocationInvalid: /RealtimeFeature/FeatureGroup/LocationInvalid/Name
+  featureGroupLocationDaily: /BatchUpdate/FeatureGroup/LocationDaily/Name
+  apigwUrl: /RealtimeFeature/APIGateway/Url
+  

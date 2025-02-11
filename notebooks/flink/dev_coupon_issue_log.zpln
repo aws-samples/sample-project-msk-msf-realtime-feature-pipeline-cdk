@@ -1,0 +1,421 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "# FlinkSQL Development to aggregate coupon issue log from MSK",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:38:44+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738804031555_1862510583",
+      "id": "paragraph_1738804031555_1862510583",
+      "dateCreated": "2025-02-06T01:07:11+0000",
+      "dateStarted": "2025-02-06T07:38:35+0000",
+      "dateFinished": "2025-02-06T07:38:42+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:991",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>FlinkSQL Development to aggregate coupon issue log from MSK</h1>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "## 1. Source Table\nConnect to Kafka. Fill out your MSK broker url, group id and kafka topic name.\n* **properties.bootstrap.servers** : Comma separated list of Kafka brokers.\n* **properties.group.id** : The id of the consumer group for Kafka source. \n* **topic** : Topic name to read data from when the table is used as source.\n \nSee also [Apache Kafka SQL Connector](https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/connectors/table/kafka/).",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:38:38+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738804040090_280678111",
+      "id": "paragraph_1738804040090_280678111",
+      "dateCreated": "2025-02-06T01:07:20+0000",
+      "dateStarted": "2025-02-06T07:38:41+0000",
+      "dateFinished": "2025-02-06T07:38:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:992",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>1. Source Table</h2>\n<p>Connect to Kafka. Fill out your MSK broker url, group id and kafka topic name.</p>\n<ul>\n<li><strong>properties.bootstrap.servers</strong> : Comma separated list of Kafka brokers.</li>\n<li><strong>properties.group.id</strong> : The id of the consumer group for Kafka source.</li>\n<li><strong>topic</strong> : Topic name to read data from when the table is used as source.</li>\n</ul>\n<p>See also <a href=\"https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/connectors/table/kafka/\">Apache Kafka SQL Connector</a>.</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.ssql\n\n-- Source Table :: Coupon issue log\n\nCREATE TABLE source_table_dev (\n  msg_id STRING,\n  msg_type STRING,\n  device_id STRING,\n  location_code STRING,\n  coupon_code STRING,\n  response STRING,\n  create_time TIMESTAMP(3), \n  WATERMARK FOR create_time AS create_time - INTERVAL '5' SECOND \n) WITH (\n  'connector' = 'kafka',\n  'topic' = '<<YOUR-KAFKA-TOPIC-NAME>>',\n  'properties.bootstrap.servers' = '<<YOUR-KAFKA-BROKER-ENDPOINTS>>',\n  'properties.group.id' = '<<YOUR-CONSUMER-GROUP_ID>>',\n  'properties.security.protocol' = 'SASL_SSL', \n  'properties.sasl.mechanism' = 'AWS_MSK_IAM', \n  'properties.sasl.jaas.config' = 'software.amazon.msk.auth.iam.IAMLoginModule required;', \n  'properties.sasl.client.callback.handler.class' = 'software.amazon.msk.auth.iam.IAMClientCallbackHandler', \n  'format' = 'json', \n  'json.timestamp-format.standard' = 'ISO-8601', \n  'json.fail-on-missing-field' = 'false',\n  'json.ignore-parse-errors' = 'true', \n  'scan.startup.mode' = 'earliest-offset'\n)",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:35:49+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738804147747_705493083",
+      "id": "paragraph_1738804147747_705493083",
+      "dateCreated": "2025-02-06T01:09:07+0000",
+      "dateStarted": "2025-02-06T01:34:10+0000",
+      "dateFinished": "2025-02-06T01:34:12+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:993"
+    },
+    {
+      "text": "## 2. Sink Table\nPut aggreagted features into Kafka topic as a sink. Fill out your MSK broker url and kafka topic name.",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:38:50+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738805650205_1157279986",
+      "id": "paragraph_1738805650205_1157279986",
+      "dateCreated": "2025-02-06T01:34:10+0000",
+      "dateStarted": "2025-02-06T07:38:50+0000",
+      "dateFinished": "2025-02-06T07:38:50+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:994",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>2. Sink Table</h2>\n<p>Put aggreagted features into Kafka topic as a sink. Fill out your MSK broker url and kafka topic name.</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.ssql\n\n-- (Query 1) Sink Table :: coupon-prefix-count\n\nCREATE TABLE sink_table_coupon_prefix_count_dev (\n  feature_group_name STRING,\n  loc_coupon_prefix STRING,\n  msg_count BIGINT,\n  event_time TIMESTAMP(3)\n) WITH (\n  'connector' = 'kafka',\n  'topic' = '<<YOUR-KAFKA-SINK-TOPIC-NAME>>',\n  'properties.bootstrap.servers' = '<<YOUR-KAFKA-BROKER-ENDPOINTS>>',\n  'properties.security.protocol' = 'SASL_SSL', \n  'properties.sasl.mechanism' = 'AWS_MSK_IAM', \n  'properties.sasl.jaas.config' = 'software.amazon.msk.auth.iam.IAMLoginModule required;', \n  'properties.sasl.client.callback.handler.class' = 'software.amazon.msk.auth.iam.IAMClientCallbackHandler', \n  'format' = 'json'\n)",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:36:46+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738805839234_1803899133",
+      "id": "paragraph_1738805839234_1803899133",
+      "dateCreated": "2025-02-06T01:37:19+0000",
+      "dateStarted": "2025-02-06T01:50:14+0000",
+      "dateFinished": "2025-02-06T01:50:15+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:995"
+    },
+    {
+      "text": "%flink.ssql\n\n-- (Query 2) Sink Table :: proto-coupon-location-invalid-count\n\nCREATE TABLE sink_table_loc_invalid_cnt_dev (\n  feature_group_name STRING,\n  location_code STRING,\n  msg_count BIGINT,\n  event_time TIMESTAMP(3)\n) WITH (\n  'connector' = 'kafka',\n  'topic' = '<<YOUR-KAFKA-SINK-TOPIC-NAME>>',\n  'properties.bootstrap.servers' = '<<YOUR-KAFKA-BROKER-ENDPOINTS>>',\n  'properties.security.protocol' = 'SASL_SSL', \n  'properties.sasl.mechanism' = 'AWS_MSK_IAM', \n  'properties.sasl.jaas.config' = 'software.amazon.msk.auth.iam.IAMLoginModule required;', \n  'properties.sasl.client.callback.handler.class' = 'software.amazon.msk.auth.iam.IAMClientCallbackHandler', \n  'format' = 'json'\n)",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:36:35+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738806614775_881949393",
+      "id": "paragraph_1738806614775_881949393",
+      "dateCreated": "2025-02-06T01:50:14+0000",
+      "dateStarted": "2025-02-06T01:55:06+0000",
+      "dateFinished": "2025-02-06T01:55:06+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:996"
+    },
+    {
+      "text": "## 3. Feature aggregation query\nProcessing streamming data. \n* Modify feature_group_name to actual feature group name in Sageaker FeatureStore\n* In you want to push aggregated feature values, unlock 'Insert' code.",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T07:38:53+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738806800009_1834736948",
+      "id": "paragraph_1738806800009_1834736948",
+      "dateCreated": "2025-02-06T01:53:20+0000",
+      "dateStarted": "2025-02-06T07:38:53+0000",
+      "dateFinished": "2025-02-06T07:38:53+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:997",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>3. Feature aggregation query</h2>\n<p>Processing streamming data.</p>\n<ul>\n<li>Modify feature_group_name to actual feature group name in Sageaker FeatureStore</li>\n<li>In you want to push aggregated feature values, unlock &lsquo;Insert&rsquo; code.</li>\n</ul>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%flink.ssql\n\n-- (Query 1) coupon-prefix-count :: number of validation requests of last 10 minute, same coupon prefix from same location\n\n-- INSERT INTO sink_table_coupon_prefix_count \nSELECT \n  'proto-coupon-prefix-count' AS feature_group_name, \n  CONCAT(location_code,'#', SUBSTRING(coupon_code, 1, CHAR_LENGTH(coupon_code) - 4)) AS loc_coupon_prefix, \n  COUNT(*) AS msg_count, \n  MAX(create_time) AS event_time \nFROM source_table_dev \nGROUP BY \n  CONCAT(location_code,'#', SUBSTRING(coupon_code, 1, CHAR_LENGTH(coupon_code) - 4)), \n  HOP(create_time, INTERVAL '5' MINUTE, INTERVAL '10' MINUTES)",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T02:12:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "feature_group_name": "string",
+                      "loc_coupon_prefix": "string",
+                      "msg_count": "string",
+                      "event_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738806897817_473207195",
+      "id": "paragraph_1738806897817_473207195",
+      "dateCreated": "2025-02-06T01:54:57+0000",
+      "dateStarted": "2025-02-06T02:12:23+0000",
+      "dateFinished": "2025-02-06T02:13:38+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:998"
+    },
+    {
+      "text": "%flink.ssql\n\n-- (Query 2) proto-coupon-location-invalid-count :: invalid coupon reauest count in 5 minutes by location\n\n-- INSERT INTO sink_table_loc_invalid_cnt_dev \nSELECT \n  'proto-coupon-location-invalid-count' AS feature_group_name, \n  location_code AS location_code, \n  COUNT(*) AS msg_count, \n  MAX(create_time) AS event_time \nFROM source_table_dev \nWHERE response = 'INVALID' \nGROUP BY \n  location_code, \n  TUMBLE(create_time, INTERVAL '5' MINUTE)",
+      "user": "anonymous",
+      "dateUpdated": "2025-02-06T02:12:53+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "feature_group_name": "string",
+                      "location_code": "string",
+                      "msg_count": "string",
+                      "event_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1738806931662_74056162",
+      "id": "paragraph_1738806931662_74056162",
+      "dateCreated": "2025-02-06T01:55:31+0000",
+      "dateStarted": "2025-02-06T02:12:48+0000",
+      "dateFinished": "2025-02-06T02:14:00+0000",
+      "status": "ERROR",
+      "$$hashKey": "object:999"
+    }
+  ],
+  "name": "dev_coupon_issue_log",
+  "id": "2KNHRYNSQ",
+  "defaultInterpreterGroup": "md",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/dev_coupon_issue_log"
+}

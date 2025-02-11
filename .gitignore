@@ -1,0 +1,9 @@
+# cache files
+.cache
+.tmp
+.DS_Store
+**/__pycache__/
+**/.ipynb_checkpoints/
+
+# tool
+.vscode

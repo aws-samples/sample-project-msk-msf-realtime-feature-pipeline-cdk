@@ -71,7 +71,7 @@ This project uses Apache Flink Application to aggregate logs in real-time. The a
 
 * Offline Store: Maintains a comprehensive history of all aggregated features, stored in Amazon S3. This is particularly useful for feature development and model training, with data accessible via Amazon Athena queries.
 
-For practical examples and implementation details, explore [a notebook for retrieving collected features.](./notebooks/jupyter/2_access_to_collected_features.ipynb).
+For practical examples and implementation details, explore [a notebook for retrieving collected features](./notebooks/jupyter/2_access_to_collected_features.ipynb).
 
 ## 4. License
 * MIT-0

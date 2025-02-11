@@ -61,7 +61,7 @@ The real-time feature aggregation process initiates when data is inserted into t
 
 Navigate to [1_sample_data_generator.ipynb](./notebooks/jupyter/1_sample_data_generator.ipynb) in Jupyter Notebook to generate and publish both normal coupon issuance logs and simulated fraudulent activities.
 
-For detailed implementation, refer to [a notebook for sample data generation](./notebooks/jupyter/1_sample_data_generator.ipynb).
+For detailed implementation, refer to [the notebook for sample data generation](./notebooks/jupyter/1_sample_data_generator.ipynb).
 
 ### 3.3 Retrieve aggregated features
 
@@ -71,7 +71,7 @@ This project uses Apache Flink Application to aggregate logs in real-time. The a
 
 * Offline Store: Maintains a comprehensive history of all aggregated features, stored in Amazon S3. This is particularly useful for feature development and model training, with data accessible via Amazon Athena queries.
 
-For practical examples and implementation details, explore [a notebook for retrieving collected features](./notebooks/jupyter/2_access_to_collected_features.ipynb).
+For practical examples and implementation details, explore [the notebook for retrieving collected features](./notebooks/jupyter/2_access_to_collected_features.ipynb).
 
 ## 4. License
 * MIT-0
